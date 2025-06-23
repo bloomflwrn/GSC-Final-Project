@@ -47,7 +47,7 @@ if selected == "Preprocessing":
     with col2:
         inputcitra2 = st.file_uploader("T1ce", type=["nii", "jpg", "jpeg", "png"])
     with col1:
-        inputcitra1 = st.file_uploader("T2", type=["nii", "jpg", "jpeg", "png"])
+        inputcitra3 = st.file_uploader("T2", type=["nii", "jpg", "jpeg", "png"])
 
     if inputcitra1:
         st.write(f"FLAIR: {inputcitra1.name}")
