@@ -41,20 +41,21 @@ if selected == "Preprocessing":
     st.write("Silakan unggah citra untuk dianalisa")
 
     #Tiga kolom input citra
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        inputcitra1 = st.file_uploader("FLAIR", type=["nii", "jpg", "jpeg", "png"])
-    with col2:
-        inputcitra2 = st.file_uploader("T1ce", type=["nii", "jpg", "jpeg", "png"])
-    with col1:
-        inputcitra3 = st.file_uploader("T2", type=["nii", "jpg", "jpeg", "png"])
+    with st.container():
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            flair = st.file_uploader("FLAIR", type=["nii", "jpg", "jpeg", "png"])
+        with col2:
+            t1ce = st.file_uploader("T1ce", type=["nii", "jpg", "jpeg", "png"])
+        with col1:
+            t2 = st.file_uploader("T2", type=["nii", "jpg", "jpeg", "png"])
 
-    if inputcitra1:
-        st.write(f"FLAIR: {inputcitra1.name}")
-    if inputcitra2:
-        st.write(f"T1ce: {inputcitra2.name}")
-    if inputcitra3:
-        st.write(f"T2: {inputcitra3.name}")
+    if flair:
+        st.write(f"FLAIR: {flair.name}")
+    if t1ce:
+        st.write(f"T1ce: {t1ce.name}")
+    if t2: 
+        st.write(f"T2: {t2.name}")
 
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
