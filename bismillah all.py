@@ -42,7 +42,7 @@ if selected == "Preprocessing":
 
     #Tiga kolom input citra
     with st.container():
-        col1, col2, col3 = st.columns([1,1,1])
+        col1, col2, col3 = st.columns([4])
         with col1:
             flair = st.file_uploader("FLAIR", type=["nii", "jpg", "jpeg", "png"])
         with col2:
