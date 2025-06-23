@@ -15,7 +15,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import nibabel as nib
-import seaborn as 
+import seaborn as sns
 
 #option menu di sidebar
 with st.sidebar:
