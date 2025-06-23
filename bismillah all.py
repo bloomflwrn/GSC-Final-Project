@@ -104,9 +104,9 @@ if selected == "Preprocessing":
                 st.image(img, caption=f"{name} Image", use_column_width=True)
             else:
                 st.error(f"Format{file_type} tidak didukung untuk {name}.")
-    display_file(flair_file, "FLAIR")
-    display_file(t1ce_file, "T1CE")
-    display_file(t2_file, "T2")
+    display_file(flair, "FLAIR")
+    display_file(t1ce, "T1CE")
+    display_file(t2, "T2")
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
     st.write("Implementasikan segmentasi di sini...")
