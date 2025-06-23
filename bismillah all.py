@@ -43,17 +43,23 @@ if selected == "Preprocessing":
 
     # 3 kolom untuk upload
     col1, col2, col3 = st.columns(3)
-
     with col1:
         flair_file = st.file_uploader("FLAIR", type=["nii", "nii.gz", "jpg", "jpeg", "png"], key="flair")
-
     with col2:
         t1ce_file = st.file_uploader("T1CE", type=["nii", "nii.gz", "jpg", "jpeg", "png"], key="t1ce")
-
     with col3:
         t2_file = st.file_uploader("T2", type=["nii", "nii.gz", "jpg", "jpeg", "png"], key="t2")
 
-    st.markdown("---")
+    st.markdown("""
+        <style>
+        div[data-testid="stFileUploader"] > label {
+            font-size: 14px;
+        }
+        div[data-testid="stFileUploader"] {
+            padding-bottom: 20px;
+        }
+        </style>
+                """, unsafe_allow_html = True)
 
     # Fungsi penampil slice .nii atau gambar biasa
     def display_file(file, name):
@@ -63,9 +69,8 @@ if selected == "Preprocessing":
                 try: # Baca NIfTI
                     img = nib.load(file)
                     data = img.get_fdata()
-                except Exception as e:
-                    st.error(f"Gagal membaca NIfTI: {e}")
-                    return
+                    st.write(f"**{name}**: Volume shape{data.shape}")
+                
                 st.write(f"**{name}**: Volume shape {data.shape}")
 
                 # Kalau single channel, expand jadi channel axis=1
@@ -91,12 +96,16 @@ if selected == "Preprocessing":
                     axes[i].axis("off")
 
                 st.pyplot(fig)
+            except Exception as e:
+                    st.error(f"Gagal membaca NIfTI: {e}")    
 
-            elif file_type in ["jpg", "jpeg", "png"]:
-                # Baca dan tampilkan citra biasa
-                img = Image.open(file)
-                st.image(img, caption=f"{name} Image", use_column_width=True)
-
+        elif file_type in ["jpg", "jpeg", "png"]:
+                try:
+                    # Baca dan tampilkan citra biasa
+                    img = Image.open(file)
+                    st.image(img, caption=f"{name} Image", use_column_width=True)
+                except Exception as e:
+                    st.error(f"Error reading files: {e}")
             else:
                 st.error(f"Format {file_type} tidak didukung untuk {name}.")
 
