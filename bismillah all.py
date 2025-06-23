@@ -52,9 +52,9 @@ if selected == "Preprocessing":
     if inputcitra1:
         st.write(f"FLAIR: {inputcitra1.name}")
     if inputcitra2:
-        st.write(f"T1ce: {inputcitra1.name}")
+        st.write(f"T1ce: {inputcitra2.name}")
     if inputcitra3:
-        st.write(f"T2: {inputcitra1.name}")
+        st.write(f"T2: {inputcitra3.name}")
 
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
