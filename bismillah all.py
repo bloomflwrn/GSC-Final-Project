@@ -37,8 +37,24 @@ with st.sidebar:
 
 # Tampilan halaman berdasarkan pilihan
 if selected == "Preprocessing":
-    st.title("Halaman Preprocessing")
-    st.write("Implementasikan preprocessing di sini...")
+    st.title("Image Preprocessing")
+    st.write("Silakan unggah citra untuk dianalisa")
+
+    #Tiga kolom input citra
+    col1, col2, col3 = st.column(3)
+    with col1:
+        inputcitra1 = st.file_uploader("FLAIR", type=["nii", "jpg", "jpeg", "png"])
+    with col2:
+        inputcitra2 = st.file_uploader("T1ce", type=["nii", "jpg", "jpeg", "png"])
+    with col1:
+        inputcitra1 = st.file_uploader("T2", type=["nii", "jpg", "jpeg", "png"])
+
+    if inputcitra1:
+        st.write(f"FLAIR: {inputcitra1.name}")
+    if inputcitra2:
+        st.write(f"T1ce: {inputcitra1.name}")
+    if inputcitra3:
+        st.write(f"T2: {inputcitra1.name}")
 
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
