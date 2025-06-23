@@ -41,7 +41,7 @@ if selected == "Preprocessing":
     st.write("Silakan unggah citra untuk dianalisa")
 
     #Tiga kolom input citra
-    col1, col2, col3 = st.column(3)
+    col1, col2, col3 = st.columns(3)
     with col1:
         inputcitra1 = st.file_uploader("FLAIR", type=["nii", "jpg", "jpeg", "png"])
     with col2:
