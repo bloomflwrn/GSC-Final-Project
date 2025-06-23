@@ -62,54 +62,60 @@ if selected == "Preprocessing":
                 """, unsafe_allow_html = True)
 
     # Fungsi penampil slice .nii atau gambar biasa
+    # Fungsi penampil file
     def display_file(file, name):
-    if file is not None:
-        file_type = file.name.split(".")[-1].lower()
-        if file_type in ["nii", "nii.gz"]:
-            try:
-                img = nib.load(file)
-                data = img.get_fdata()
-                st.write(f"**{name}**: Volume shape {data.shape}")
+        if file is not None:
+            file_type = file.name.split(".")[-1].lower()
+            if file_type in ["nii", "nii.gz"]:
+                try:
+                    img = nib.load(file)
+                    data = img.get_fdata()
 
-                if data.ndim == 3:
-                    data = np.expand_dims(data, axis=-1)
+                    st.write(f"**{name}**: Volume shape {data.shape}")
 
-                slice_idx = st.slider(
-                    f"Pilih slice {name}",
-                    min_value=0,
-                    max_value=data.shape[2] - 1,
-                    value=data.shape[2] // 2,
-                    key=f"{name}_slider"
-                )
+                    if data.ndim == 3:
+                        data = np.expand_dims(data, axis=-1)
 
-                fig, axes = plt.subplots(1, data.shape[3], figsize=(5 * data.shape[3], 5))
-                if data.shape[3] == 1:
-                    axes = [axes]
+                    slice_idx = st.slider(
+                        f"Pilih slice {name}",
+                        min_value=0,
+                        max_value=data.shape[2] - 1,
+                        value=data.shape[2] // 2,
+                        key=f"{name}_slider"
+                    )
 
-                for i in range(data.shape[3]):
-                    axes[i].imshow(data[:, :, slice_idx, i], cmap="gray")
-                    axes[i].set_title(f"{name} - Channel {i+1}")
-                    axes[i].axis("off")
+                    fig, axes = plt.subplots(1, data.shape[3], figsize=(5 * data.shape[3], 5))
+                    if data.shape[3] == 1:
+                        axes = [axes]
 
-                st.pyplot(fig)
+                    for i in range(data.shape[3]):
+                        axes[i].imshow(data[:, :, slice_idx, i], cmap="gray")
+                        axes[i].set_title(f"{name} - Channel {i+1}")
+                        axes[i].axis("off")
 
-            except Exception as e:
-                st.error(f"Error saat membaca NIfTI: {e}")
+                    st.pyplot(fig)
 
-        elif file_type in ["jpg", "jpeg", "png"]:
-            try:
-                img = Image.open(file)
-                st.image(img, caption=f"{name} Image", use_column_width=True)
-            except Exception as e:
-                st.error(f"Error membaca gambar: {e}")
+                except Exception as e:
+                    st.error(f"Error membaca NIfTI: {e}")
 
-        else:
-            st.error(f"Format {file_type} tidak didukung untuk {name}.")
-            
-    if st.button("Show Images"):
-        display_file(flair_file, "FLAIR")
-        display_file(t1ce_file, "T1CE")
-        display_file(t2_file, "T2")
+            elif file_type in ["jpg", "jpeg", "png"]:
+                try:
+                    img = Image.open(file)
+                    st.image(img, caption=f"{name} Image", use_column_width=True)
+                except Exception as e:
+                    st.error(f"Error membaca gambar: {e}")
+            else:
+                st.error(f"Format {file_type} tidak didukung untuk {name}.")
+                
+    # ---------------------
+    # Tombol untuk memproses & tampilkan
+    if st.button("Tampilkan Hasil"):
+        if flair_file:
+            display_file(flair_file, "FLAIR")
+        if t1ce_file:
+            display_file(t1ce_file, "T1CE")
+        if t2_file:
+            display_file(t2_file, "T2")
     
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
