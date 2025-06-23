@@ -57,6 +57,17 @@ if selected == "Preprocessing":
     if t2: 
         st.write(f"T2: {t2.name}")
 
+    st.markdown("""
+        <style>
+        div[data-testid="stFileUploader"] > label {
+            font-size: 14px;
+        }
+        div[data-testid="stFileUploader"] {
+            padding-bottom: 20px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
     st.write("Implementasikan segmentasi di sini...")
