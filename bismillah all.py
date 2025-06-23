@@ -63,17 +63,14 @@ if selected == "Preprocessing":
 
     # Fungsi penampil slice .nii atau gambar biasa
     def display_file(file, name):
-        if file is not None:
-            file_type = file.name.split(".")[-1].lower()
-            if file_type in ["nii", "nii.gz"]:
-                try: # Baca NIfTI
-                    img = nib.load(file)
-                    data = img.get_fdata()
-                    st.write(f"**{name}**: Volume shape{data.shape}")
-                
+    if file is not None:
+        file_type = file.name.split(".")[-1].lower()
+        if file_type in ["nii", "nii.gz"]:
+            try:
+                img = nib.load(file)
+                data = img.get_fdata()
                 st.write(f"**{name}**: Volume shape {data.shape}")
 
-                # Kalau single channel, expand jadi channel axis=1
                 if data.ndim == 3:
                     data = np.expand_dims(data, axis=-1)
 
@@ -85,10 +82,9 @@ if selected == "Preprocessing":
                     key=f"{name}_slider"
                 )
 
-                # Kalau ada beberapa channel, tampilkan semua
                 fig, axes = plt.subplots(1, data.shape[3], figsize=(5 * data.shape[3], 5))
                 if data.shape[3] == 1:
-                    axes = [axes]  # single channel, buat list
+                    axes = [axes]
 
                 for i in range(data.shape[3]):
                     axes[i].imshow(data[:, :, slice_idx, i], cmap="gray")
@@ -96,18 +92,19 @@ if selected == "Preprocessing":
                     axes[i].axis("off")
 
                 st.pyplot(fig)
+
             except Exception as e:
-                    st.error(f"Gagal membaca NIfTI: {e}")    
+                st.error(f"Error saat membaca NIfTI: {e}")
 
         elif file_type in ["jpg", "jpeg", "png"]:
-                try:
-                    # Baca dan tampilkan citra biasa
-                    img = Image.open(file)
-                    st.image(img, caption=f"{name} Image", use_column_width=True)
-                except Exception as e:
-                    st.error(f"Error reading files: {e}")
-            else:
-                st.error(f"Format {file_type} tidak didukung untuk {name}.")
+            try:
+                img = Image.open(file)
+                st.image(img, caption=f"{name} Image", use_column_width=True)
+            except Exception as e:
+                st.error(f"Error membaca gambar: {e}")
+
+        else:
+            st.error(f"Format {file_type} tidak didukung untuk {name}.")
 
     # Tampilkan masing-masing
     display_file(flair_file, "FLAIR")
