@@ -60,10 +60,12 @@ if selected == "Preprocessing":
         if file is not None:
             file_type = file.name.split(".")[-1].lower()
             if file_type in ["nii", "nii.gz"]:
-                # Baca NIfTI
-                img = nib.load(file)
-                data = img.get_fdata()
-
+                try: # Baca NIfTI
+                    img = nib.load(file)
+                    data = img.get_fdata()
+                except Exception as e:
+                    st.error(f"Gagal membaca NIfTI: {e}")
+                    return
                 st.write(f"**{name}**: Volume shape {data.shape}")
 
                 # Kalau single channel, expand jadi channel axis=1
