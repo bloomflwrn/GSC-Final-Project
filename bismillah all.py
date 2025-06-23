@@ -17,20 +17,33 @@ import matplotlib.pyplot as plt
 import nibabel as nib
 import seaborn as sns
 
-#option menu di sidebar
+# Sidebar dengan option_menu
 with st.sidebar:
-  selected = option_menu(
-    menu_title = "Tugas Akhir",
-    options = ["Preprocessing", "Segmentasi", "Klasifikasi"],
-    menu_icon = None,
-    icons = ["house", "hr", "diagram-3, "person"],
-    default_index = 0,
-    style = {
-      "icon" : {"color" : "blue"},
-      "nav-link" : {
-        "text-align:" : "left",
-        "margin" : "0px",
-        "--hover-color" : "#eee"
-      }
-    }
-  )
+    selected = option_menu(
+        menu_title="Tugas Akhir",
+        options=["Preprocessing", "Segmentasi", "Klasifikasi"],
+        menu_icon=None,
+        icons=["house", "hr", "diagram-3", "person"],
+        default_index=0,
+        styles={
+            "icon": {"color": "blue"},
+            "nav-link": {
+                "text-align": "left",
+                "margin": "0px",
+                "--hover-color": "#eee",
+            },
+        }
+    )
+
+# Tampilan halaman berdasarkan pilihan
+if selected == "Preprocessing":
+    st.title("Halaman Preprocessing")
+    st.write("Implementasikan preprocessing di sini...")
+
+elif selected == "Segmentasi":
+    st.title("Halaman Segmentasi")
+    st.write("Implementasikan segmentasi di sini...")
+
+elif selected == "Klasifikasi":
+    st.title("Halaman Klasifikasi")
+    st.write("Implementasikan klasifikasi di sini...")
