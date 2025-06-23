@@ -1,1 +1,14 @@
 streamlit
+streamlit_option_menu
+streamlit_image_comparison
+hydralit_components
+torch
+torchvision
+torchsummary
+nibabel
+numpy
+pandas
+opencv-python
+scipy.ndimage
+
+
