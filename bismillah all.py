@@ -105,11 +105,12 @@ if selected == "Preprocessing":
 
         else:
             st.error(f"Format {file_type} tidak didukung untuk {name}.")
-
-    # Tampilkan masing-masing
-    display_file(flair_file, "FLAIR")
-    display_file(t1ce_file, "T1CE")
-    display_file(t2_file, "T2")
+            
+    if st.button("Show Images"):
+        display_file(flair_file, "FLAIR")
+        display_file(t1ce_file, "T1CE")
+        display_file(t2_file, "T2")
+    
 elif selected == "Segmentasi":
     st.title("Halaman Segmentasi")
     st.write("Implementasikan segmentasi di sini...")
