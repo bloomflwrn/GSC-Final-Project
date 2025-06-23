@@ -1,14 +1,12 @@
-streamlit
-streamlit_option_menu
-streamlit_image_comparison
-hydralit_components
-torch
-torchvision
-torchsummary
-nibabel
-numpy
-pandas
-opencv-python
-scipy.ndimage
+streamlit>=1.34.0
+streamlit-option-menu>=0.3.6
+streamlit-image-comparison>=0.0.4
 
+torch>=2.0.0
+torchvision>=0.15.0
 
+pandas>=1.5.0
+numpy>=1.23.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+nibabel>=5.2.0
